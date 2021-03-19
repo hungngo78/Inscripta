@@ -1,0 +1,118 @@
+<div class="edit-wrapper">
+	<section>
+		<form [formGroup]="editRequestForm" (submit)="submit()">
+			<h2>Create New Insertion Edit Request </h2>
+			<div class="edit-request-row">
+				<mat-form-field>
+					<mat-label>Select a chromosome</mat-label>
+					<mat-select (selectionChange)="onChromoChange($event.value)" formControlName="chromosome">
+						<mat-option *ngFor="let chromosome of chromosomes" [value]="chromosome.name">
+						{{ chromosome.name }}
+						</mat-option>
+					</mat-select>
+					<mat-error *ngIf="editRequestForm.get('chromosome')!.hasError('required')">
+						You must make a selection
+					</mat-error>
+				</mat-form-field>	
+
+				<!--p>
+				Selected Value: {{selectedBook}}
+				</p-->
+			</div>
+
+			<div class="edit-request-row">
+				<mat-form-field>
+					<mat-label>Select a gene</mat-label>
+					<mat-select (selectionChange)="onGeneChange($event.value)" formControlName="gene" >
+						<mat-option *ngFor="let gene of genes" [value]="gene.name">
+						{{ gene.name }}
+						</mat-option>
+					</mat-select>
+					<mat-error *ngIf="editRequestForm.get('gene')!.hasError('required')">
+						You must make a selection
+					</mat-error>
+				</mat-form-field>	
+			</div>
+
+			<div class="edit-request-row">
+				<mat-form-field class="row-full-width">
+					<mat-label>Relative gene position</mat-label>
+					<input type="number" maxlength="9" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" matInput formControlName="editPosition"  placeholder="" value="">
+				</mat-form-field>
+			</div>
+
+			<div class="edit-request-row">
+				<mat-form-field class="row-full-width">
+					<mat-label>Nucleotide(s) to insert</mat-label>
+					<input type="text" maxlength="30" matInput formControlName="nucleotide" placeholder="" value="">
+				</mat-form-field>
+			</div>
+
+			<div class="edit-request-row">
+				<button mat-raised-button color="primary" type="submit">Request Edit</button>
+			</div>
+		</form>
+	</section>
+
+	<mat-divider></mat-divider>
+	
+	<section>
+		<h2>Previous Edit Requests </h2>
+		<table mat-table [dataSource]="editRequests" class="mat-elevation-z8">
+
+		<!--- Note that these columns can be defined in any order.
+				The actual rendered columns are set as a property on the row definition" -->
+
+		<!-- id Column -->
+		<ng-container matColumnDef="id">
+			<th mat-header-cell *matHeaderCellDef> Id. </th>
+			<td mat-cell *matCellDef="let element"> {{element.id}} </td>
+		</ng-container>
+
+		<!--  chromosome column -->
+		<ng-container matColumnDef="chromosome">
+			<th mat-header-cell *matHeaderCellDef> Chromosome </th>
+			<td mat-cell *matCellDef="let element"> {{element.chromosome}} </td>
+		</ng-container>
+
+		<!-- geneName column-->
+		<ng-container matColumnDef="geneName">
+			<th mat-header-cell *matHeaderCellDef> Gene Name </th>
+			<td mat-cell *matCellDef="let element"> {{element.geneName}} </td>
+		</ng-container>
+
+		<!-- geneStart column-->
+		<ng-container matColumnDef="geneStart">
+			<th mat-header-cell *matHeaderCellDef> Gene Start </th>
+			<td mat-cell *matCellDef="let element"> {{element.cdsStart}} </td>
+		</ng-container>
+
+		<!-- geneEnd column-->
+		<ng-container matColumnDef="geneEnd">
+			<th mat-header-cell *matHeaderCellDef> Gene End </th>
+			<td mat-cell *matCellDef="let element"> {{element.cdsEnd}} </td>
+		</ng-container>
+
+		<!--editPosition column-->
+		<ng-container matColumnDef="editPosition">
+			<th mat-header-cell *matHeaderCellDef> Edit Position </th>
+			<td mat-cell *matCellDef="let element"> {{element.editPosition}} </td>
+		</ng-container>
+
+		<!-- Nucleotide Column -->
+		<ng-container matColumnDef="nucleotide">
+			<th mat-header-cell *matHeaderCellDef> Nucleotide </th>
+			<td mat-cell *matCellDef="let element"> {{element.nucleotide}} </td>
+		</ng-container>
+
+		<!-- dateTime Column -->
+		<ng-container matColumnDef="dateTime">
+			<th mat-header-cell *matHeaderCellDef> Date Time </th>
+			<td mat-cell *matCellDef="let element"> {{element.dateTime}} </td>
+		</ng-container>		
+
+		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+		<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+		</table>
+	</section>
+</div>

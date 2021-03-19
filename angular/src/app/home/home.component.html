@@ -1,0 +1,152 @@
+<div class="home-wrapper">
+    <h4 style="text-align: center;">Welcome !</h4>
+    <br/>
+    <h2>System Requirements and User Stories</h2>
+
+    <h4>High level (epic) requirement</h4>
+    <p>Build out this system, so that a user can create new edit insertion requests and view previously created edit requests.</p>
+
+    <h3>System Requirements</h3>
+    
+        <ul>
+            <li>
+                Build a front end using the starter Angular project
+                <ul>
+                    <li>
+                        Feel free to use Angular Material components or any other open source UI component package you might prefer.
+                    </li>
+                    <li>
+                        CSS Styling is not the main focus of this exercise
+                    </li>
+                </ul>
+            </li>
+            <li>
+                Build out back end web service from the provided Spring Boot (Java 8) starter project
+                <ul>
+                    <li>
+                        Build out RESTful endpoints and appropriate class structures to support front end data and persistence
+                    </li>
+                    <li>
+                        <b>NOTE</b> - There is a java package called <code class="code">ucsc</code> that already knows how to query a public API to fetch data for our target genome <code class="code">sacCer3</code>. 
+                        <ul>
+                            <li>It can fetch chromosomes for this genome and gene definitions with their start/stop positions within a given chromosome. </li>
+                            <li>
+                                This package does not need to be altered. It can be considered readonly.
+                            </li>
+                        </ul>
+                    </li>
+                    
+                </ul>
+            </li>
+            <li>
+                Any unit tests must pass
+            </li>
+        </ul>
+    
+    <h3>User Stories</h3>
+    <ul>
+        <li>
+            <h4>As a User, I can create a Gene Insertion Edit request</h4>
+            <h5>Acceptance Criteria</h5>
+            <ul>
+                <li>
+                    User can navigate to a screen using the menu where new Edit Requests can be created
+                </li>
+                <li>
+                    User is presented with a dropdown of possible chromosomes
+                </li>
+                <li>
+                    When the user selects a chromosome, they are presented with valid genes within that chromosome
+                </li>
+                <li>
+                    When the user selects a gene, they have the ability to enter a <b>relative</b> position within the gene.
+                </li>
+                <li>
+                    This relative position must be validated, based on start/stop positions of the selected gene provided by the UCSC Gene API
+                    <ul>
+                        <li>
+                            (e.g.  if a gene hypothetically has a start position of 100 and an end of position of 150, then there are 50 possible valid positions to insert at (between position 1 and 50 of the selected gene)
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    User has the ability to enter one or more Nucleotides (must be one of the following: “A”,”C”,”T”, or “G”) to insert into the gene
+                </li>
+                <li>
+                    After the inputs have been validated, the user can save their edit request (API call to backend)
+                    <ul>
+                        <li>
+                            In lieu of a database, the data can be saved to flat file on the server side local disk (or to save time, you could persist this to application scoped memory)
+                        </li>
+                        <li>
+                            Generate a unique identifier for the edit request
+                        </li>
+                        <li>
+                            In addition to saving the inputs from the user, the “target” gene record must be saved alongside.
+                        </li>
+                    </ul>
+                </li>  
+                
+            </ul>
+        </li>
+        <li>
+            <h4>As a User, I can view previous Gene Insertion Edit requests</h4>
+            <h5>Acceptance Criteria</h5>
+            <ul>
+                <li>
+                    User can view previous Insertion Edit Requests in a table/grid format
+                </li>
+                <li>
+                    Each record must have:
+                    <ul>
+                        <li>
+                            Unique identifier
+                        </li>
+                        <li>
+                            Gene name
+                        </li>
+                        <li>
+                            Gene start
+                        </li>
+                        <li>
+                            Gene stop
+                        </li>
+                        <li>
+                            Edit position
+                        </li>
+                        <li>
+                            Nucleotide(s) Inserted
+                        </li>
+                        <li>
+                            Datetime saved
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    After edit requests are saved, this table should refresh with latest values
+                </li>              
+            </ul>
+        </li>
+    </ul>
+
+    <h3>UI Wireframe</h3>
+    <img src="./assets/UI_mockup.JPG" alt="image">
+</div>
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
